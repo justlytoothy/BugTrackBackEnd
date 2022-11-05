@@ -4,6 +4,8 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import router from './routes/api.js'
 import auth from './middleware/auth.js'
+import https from 'https'
+import fs from 'fs'
 
 const app = express()
 app.use(bodyParser.json({ extended: true }))
@@ -39,6 +41,20 @@ app.use('/', router)
 ////////////////////////////////////////////////////////////////////////////////////
 
 const PORT = process.env.REACT_APP_PORT || 3500
-app.listen(PORT, () => {
-	console.log(`Server started on ${PORT}`)
-})
+if (process.env.CHECK == 'yes') {
+	https
+		.createServer(
+			{
+				key: fs.readFileSync(process.env.REACT_KEY_FILE),
+				cert: fs.readFileSync(process.env.REACT_CRT_FILE),
+			},
+			app
+		)
+		.listen(3500, () => {
+			console.log(`Server started on port ${PORT}`)
+		})
+} else {
+	app.listen(PORT, () => {
+		console.log(`Server started on ${PORT}`)
+	})
+}
