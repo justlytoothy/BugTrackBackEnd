@@ -20,7 +20,6 @@ router.put('/user', function (req, res) {
 	userController.editUser(req, res)
 })
 router.post('/user/login', function (req, res) {
-	console.log('loggin in')
 	userController.loginUser(req, res)
 })
 
