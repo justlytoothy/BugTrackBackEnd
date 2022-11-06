@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "env-cmd -f .env nodemon server.js",
-    "prod": "env-cmd -f .env.production nodemon prodserver.js",
+    "prod": "env-cmd -f .env.production nodemon server.js",
     "client": "env-cmd -f .env npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
