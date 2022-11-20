@@ -34,6 +34,9 @@ router.post('/user/login', function (req, res) {
 router.get('/user', auth.verifyToken, function (req, res) {
 	userController.getUsers(req, res)
 })
+router.put('/user', auth.verifyToken, function (req, res) {
+	userController.editUser(req, res)
+})
 router.delete('/user', auth.verifyToken, function (req, res) {
 	userController.deleteUser(req, res)
 })
